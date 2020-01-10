@@ -1,7 +1,7 @@
 Name:           perl-Crypt-SSLeay
 Summary:        Crypt::SSLeay - OpenSSL glue that provides LWP https support
 Version:        0.57
-Release:        16%{?dist}
+Release:        17%{?dist}
 License:        GPL+ or Artistic
 Group:          Development/Libraries
 Source0:        http://www.cpan.org/authors/id/D/DL/DLAND/Crypt-SSLeay-%{version}.tar.gz
@@ -18,7 +18,9 @@ BuildRequires:  perl(Test::Pod::Coverage)
 BuildRequires:  perl(ExtUtils::MakeMaker::Coverage)
 BuildRequires:  perl(Test::Pod)
 BuildRequires:  perl(LWP::UserAgent)
+BuildRequires:  /etc/pki/tls/certs/ca-bundle.crt
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
+Requires:       /etc/pki/tls/certs/ca-bundle.crt
 
 
 %description
@@ -73,6 +75,8 @@ find $RPM_BUILD_ROOT -type d -depth -exec rmdir {} 2>/dev/null ';'
 chmod -R u+w $RPM_BUILD_ROOT/*
 chmod -R 644 eg/*
 chmod -R 644 certs/*
+rm certs/ca-bundle.crt
+ln -s /etc/pki/tls/certs/ca-bundle.crt certs/ca-bundle.crt
 
 %check
 make test
@@ -88,6 +92,10 @@ make test
 
 
 %changelog
+* Tue Apr  1 2014 Petr Pisar <ppisar@redhat.com> - 0.57-17
+- Link to the ca-certificates ca-bundle.crt instead of shipping our own,
+  outdated copy (bug #1059992)
+
 * Mon Dec  7 2009 Stepan Kasal <skasal@redhat.com> - 0.57-16
 - rebuild against perl 5.10.1
 
