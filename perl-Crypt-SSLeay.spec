@@ -1,7 +1,7 @@
 Name:           perl-Crypt-SSLeay
 Summary:        Crypt::SSLeay - OpenSSL glue that provides LWP https support
 Version:        0.64
-Release:        3%{?dist}
+Release:        5%{?dist}
 License:        GPL+ or Artistic
 Group:          Development/Libraries
 Source0:        http://www.cpan.org/authors/id/N/NA/NANIS/Crypt-SSLeay-%{version}.tar.gz
@@ -82,6 +82,12 @@ make test
 %{_mandir}/man3/Net::SSL.3pm*
 
 %changelog
+* Fri Jan 24 2014 Daniel Mach <dmach@redhat.com> - 0.64-5
+- Mass rebuild 2014-01-24
+
+* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 0.64-4
+- Mass rebuild 2013-12-27
+
 * Wed Aug  8 2012 Paul Howarth <paul@city-fan.org> - 0.64-3
 - Remove circular BR: perl(Net::SSL) provided by this package
 - Placate rpmlint regarding file permissions
